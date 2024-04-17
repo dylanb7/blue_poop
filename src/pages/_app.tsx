@@ -1,5 +1,15 @@
 import { type AppType } from "next/app";
 import { Inter } from "next/font/google";
+import { Amplify } from "aws-amplify";
+
+import type { WithAuthenticatorProps } from "@aws-amplify/ui-react";
+
+import { withAuthenticator } from "@aws-amplify/ui-react";
+
+import "@aws-amplify/ui-react/styles.css";
+
+import config from "../amplifyconfiguration.json";
+Amplify.configure(config);
 
 import { api } from "~/utils/api";
 
@@ -17,4 +27,4 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   );
 };
 
-export default api.withTRPC(MyApp);
+export default withAuthenticator(api.withTRPC(MyApp));
