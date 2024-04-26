@@ -26,46 +26,45 @@ export const HowItWorks: React.FC = () => {
           should freeze it until it is time to complete the test.
         </p>
         <Xwrapper>
-          <div className="mx-auto flex flex-row items-center justify-between">
-            <div className="flex flex-col gap-10">
-              <MealCard id="meal-card" />
-              <MovementCard
-                id="first-brown"
-                isBlue={false}
-                shownBms={1}
-                title="Start Recording Bowel Movements"
-                description="The first bowel movement might not be blue yet"
-              />
-              <MovementCard
-                id="first-blue"
-                isBlue={true}
-                shownBms={1}
-                title="First Blue Bowel Movement"
-                description="Eventually you should have a blue/green bowel movement"
-              />
-              <MovementCard
-                id="blues-group"
-                isBlue={true}
-                shownBms={3}
-                title="Keep Recording"
-                description="The number of blue bowel movements may vary"
-              />
-              <MovementCard
-                id="last-blue"
-                isBlue={true}
-                shownBms={1}
-                title="Last Blue Bowel Movement"
-                description="You won't know it until you record a regular colored bowel movement"
-              />
-              <MovementCard
-                id="test-end"
-                isBlue={false}
-                shownBms={1}
-                title="End of test"
-                description="The first brown bowel movement after a blue one marks the end of the test. Mark down you're transit time and lag phase"
-              />
-            </div>
+          <div className="mx-auto flex flex-col gap-10">
+            <MealCard id="meal-card" />
+            <MovementCard
+              id="first-brown"
+              isBlue={false}
+              shownBms={1}
+              title="Start Recording Bowel Movements"
+              description="The first bowel movement might not be blue yet"
+            />
+            <MovementCard
+              id="first-blue"
+              isBlue={true}
+              shownBms={1}
+              title="First Blue Bowel Movement"
+              description="Eventually you should have a blue/green bowel movement"
+            />
+            <MovementCard
+              id="blues-group"
+              isBlue={true}
+              shownBms={3}
+              title="Keep Recording"
+              description="The number of blue bowel movements may vary"
+            />
+            <MovementCard
+              id="last-blue"
+              isBlue={true}
+              shownBms={1}
+              title="Last Blue Bowel Movement"
+              description="You won't know it until you record a regular colored bowel movement"
+            />
+            <MovementCard
+              id="test-end"
+              isBlue={false}
+              shownBms={1}
+              title="End of test"
+              description="The first brown bowel movement after a blue one marks the end of the test. Mark down you're transit time and lag phase"
+            />
           </div>
+
           <Xarrow
             start={"meal-card"}
             end={"first-brown"}
