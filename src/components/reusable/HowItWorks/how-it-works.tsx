@@ -61,7 +61,7 @@ export const HowItWorks: React.FC = () => {
               isBlue={false}
               shownBms={1}
               title="End of test"
-              description="The first brown bowel movement after a blue one marks the end of the test. Mark down you're transit time and lag phase"
+              description="The first brown bowel movement after a blue one marks the end of the test. Mark down you're transit time and lag phase."
             />
           </div>
 

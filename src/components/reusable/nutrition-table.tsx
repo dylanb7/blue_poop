@@ -32,8 +32,12 @@ export const NutrientsTable: React.FC = () => {
   ];
   return (
     <>
-      <ScrollAnchor tocItem={NutritionTOC} title="Nutritional Components">
-        <span className="text-md text-muted-foreground">
+      <ScrollAnchor
+        tocItem={NutritionTOC}
+        title="Nutritional Components"
+        className="text-nowrap"
+      >
+        <span className="text-md text-wrap text-muted-foreground">
           &nbsp;·&nbsp;calories/macronutrient
         </span>
       </ScrollAnchor>

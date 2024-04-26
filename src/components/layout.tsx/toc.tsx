@@ -73,8 +73,8 @@ export function useActiveItem(itemIds: string[]) {
 //index toc items
 
 export const BlueDyeTestTOC: TOCItem = {
-  name: "Blue Dye Test",
-  id: "blue-dye-test",
+  name: "Blue Dye Meal",
+  id: "blue-dye-meal",
 };
 
 export const HowItWorksTOC: TOCItem = {

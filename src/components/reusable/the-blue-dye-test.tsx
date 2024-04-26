@@ -6,11 +6,11 @@ export const BlueDyeTest: React.FC = () => {
     <div className="mt-20">
       <ScrollAnchor tocItem={BlueDyeTestTOC} />
       <p className="mt-6 max-w-prose leading-7 [&:not(:first-child)]:mt-6">
-        The Blue Dye Test is designed to be an at home, noninvasive measure of
+        The Blue Dye Meal is designed to be an at home, noninvasive measure of
         GI transit time. Traditional measures of GI transit time require nuclear
         medical imaging. The participant swallows a radioactive tracer and has
         multiple scans over a few hours. While these methods yeild more detailed
-        results than the blue dye test, its possible to get a transit measure
+        results than the blue dye meal, its possible to get a transit measure
         with just blue dye.
         <br />
         This method was popularized with the{" "}
