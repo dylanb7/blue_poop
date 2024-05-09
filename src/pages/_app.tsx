@@ -1,27 +1,20 @@
 import { type AppType } from "next/app";
 import { Inter } from "next/font/google";
 import { Amplify } from "aws-amplify";
-
-import type { WithAuthenticatorProps } from "@aws-amplify/ui-react";
-
 import { withAuthenticator } from "@aws-amplify/ui-react";
-
 import "@aws-amplify/ui-react/styles.css";
-
 import config from "../amplifyconfiguration.json";
-Amplify.configure(config);
-
 import { api } from "~/utils/api";
-
 import "~/styles/globals.css";
+
+Amplify.configure(config);
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
 });
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <main className={`font-sans ${inter.variable}`}>
+    <main className={`flex-1 ${inter.className}`}>
       <Component {...pageProps} />
     </main>
   );

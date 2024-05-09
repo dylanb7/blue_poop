@@ -1,0 +1,151 @@
+type GroupInfo
+  @model
+  @auth(rules: [{ allow: owner }, { allow: groups, groupsField: "group" }]) {
+  id: ID!
+  group: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+  name: String
+  description: String
+}
+
+type SubUser
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groupsField: "group", operations: [read] }
+      { allow: owner }
+    ]
+  ) {
+  id: ID!
+    @auth(
+      rules: [
+        { allow: groups, groupsField: "group", operations: [read] }
+        { allow: owner }
+      ]
+    )
+  group: String
+  rootEmail: String
+  name: String @auth(rules: [{ allow: owner }])
+  gender: String @auth(rules: [{ allow: owner }])
+  birthYear: Int @auth(rules: [{ allow: owner }])
+  isControl: Boolean!
+    @auth(
+      rules: [
+        { allow: owner }
+        { allow: groups, groupsField: "group", operations: [read] }
+      ]
+    )
+  blueDyeTestID: ID
+  blueDyeTest: BlueDyeTest @hasOne(fields: ["blueDyeTestID"])
+  responses: [Response] @hasMany(indexName: "responsesBySub", fields: ["id"])
+  detailResponses: [DetailResponse]
+    @hasMany(indexName: "detailsBySub", fields: ["id"])
+  blueDyeResponses: [BlueDyeResponse]
+    @hasMany(indexName: "blueResponseBySub", fields: ["id"])
+}
+
+type Response
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "group", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  group: String
+  stamp: AWSDateTime!
+  type: String!
+  qid: String!
+  textResponse: String
+  selected: Int
+  numeric: Int
+  all_selected: [Int!]
+  subUserId: ID! @index(name: "responsesBySub", sortKeyFields: ["stamp"])
+  detailResponseID: ID @index(name: "byDetail")
+}
+
+type DetailResponse
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "group", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  group: String
+  stamp: AWSDateTime!
+  type: String
+  description: String
+  responses: [Response] @hasMany(indexName: "byDetail", fields: ["id"])
+  subUserId: ID! @index(name: "detailsBySub", sortKeyFields: ["stamp"])
+}
+
+type BlueDyeTest
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "group", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  group: String
+  stamp: AWSDateTime!
+  finishedEating: Int
+  logs: [BlueDyeTestLog] @hasMany(indexName: "byBlueDyeTest", fields: ["id"])
+  subUserId: ID!
+  subUser: SubUser! @belongsTo(fields: ["subUserId"])
+}
+
+type BlueDyeResponse
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "group", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  group: String
+  stamp: AWSDateTime!
+  finishedEating: Int!
+  logs: [BlueDyeResponseLog]
+    @hasMany(indexName: "byBlueResponse", fields: ["id"])
+  subUserId: ID! @index(name: "blueResponseBySub", sortKeyFields: ["stamp"])
+}
+
+type BlueDyeTestLog
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "group", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  group: String
+  isBlue: Boolean!
+  blueDyeTestID: ID @index(name: "byBlueDyeTest")
+  blueDyeTest: BlueDyeTest @belongsTo(fields: ["blueDyeTestID"])
+  detailResponseID: ID
+  response: DetailResponse @hasOne(fields: ["detailResponseID"])
+}
+
+type BlueDyeResponseLog
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "group", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  group: String
+  isBlue: Boolean!
+  blueDyeResponseID: ID @index(name: "byBlueResponse")
+  blueDyeResponse: BlueDyeResponse @belongsTo(fields: ["blueDyeResponseID"])
+  detailResponseID: ID
+  response: DetailResponse @hasOne(fields: ["detailResponseID"])
+}
